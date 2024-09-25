@@ -1,0 +1,16 @@
+try:
+    while True:
+        # Read sensors
+        humidity, temperature = read_temp_humidity()
+        soil_moisture = read_soil_moisture()
+        
+        # Capture and analyze image for plant type
+        frame = capture_image()
+        plant_type = predict_plant(frame)
+        
+        # Control sprinkler based on the data
+        control_sprinkler(plant_type, soil_moisture, humidity, temperature)
+        
+        time.sleep(60)  # Wait for 1 minute before the next iteration
+except KeyboardInterrupt:
+    GPIO.cleanup()  # Clean up GPIO pins on exit
