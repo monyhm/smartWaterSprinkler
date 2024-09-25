@@ -1,0 +1,12 @@
+def control_sprinkler(plant_type, soil_moisture, humidity, temperature):
+    # Example logic to determine whether to water plants
+    if plant_type == 'DryPlant' and soil_moisture < 30:
+        GPIO.output(sprinkler_pin, GPIO.HIGH)  # Turn on sprinkler
+        time.sleep(10)  # Water for 10 seconds
+        GPIO.output(sprinkler_pin, GPIO.LOW)  # Turn off sprinkler
+    elif humidity < 50 and soil_moisture < 40:
+        GPIO.output(sprinkler_pin, GPIO.HIGH)
+        time.sleep(15)
+        GPIO.output(sprinkler_pin, GPIO.LOW)
+    else:
+        GPIO.output(sprinkler_pin, GPIO.LOW)  # Ensure sprinkler is off
