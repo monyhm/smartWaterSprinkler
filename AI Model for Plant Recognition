@@ -1,0 +1,16 @@
+# Load pre-trained AI model (assuming a TensorFlow model for plant detection)
+model = tf.keras.models.load_model('plant_detection_model.h5')
+
+def capture_image():
+    cap = cv2.VideoCapture(0)
+    ret, frame = cap.read()
+    cap.release()
+    return frame
+
+def predict_plant(frame):
+    # Preprocess image for AI model
+    img = cv2.resize(frame, (224, 224))
+    img = img.astype('float32') / 255.0
+    img = img.reshape((1, 224, 224, 3))
+    prediction = model.predict(img)
+    return prediction
